@@ -1,0 +1,265 @@
+create table alumnos(
+	alum_ID int identity (1,1) not null primary key,
+	alum_nombre varchar (255) not null,
+	alum_apellido varchar (255) not null,
+	alum_edad int not null,
+	alum_ciud_ID int not null
+	)
+
+create table ciudad(
+	ciud_ID int identity(1,1) not null primary key,
+	ciud_nombre varchar (255) not null,
+	ciud_CodP int not null
+	)
+
+create table provincia(
+	prov_ID int identity (1,1) not null primary key,
+	prov_nombre varchar(255) not null
+	)
+
+create table pais(
+	pais_ID int identity(1,1) not null primary key,	
+	pais_nombre varchar(255) not null
+	)
+
+
+insert into alumnos(alum_nombre,alum_apellido,alum_edad) values ('Valentin','Fuentes',17)
+insert into alumnos(alum_nombre,alum_apellido,alum_edad) values ('Marcos','Zotelo',18)
+insert into alumnos(alum_nombre,alum_apellido,alum_edad) values ('Taiel Danilo','Moreno',18)
+insert into alumnos(alum_nombre,alum_apellido,alum_edad) values ('Tomas','Giachello',17)
+insert into alumnos(alum_nombre,alum_apellido,alum_edad) values ('Aramis Benjamin','Terza',18)
+insert into alumnos(alum_nombre,alum_apellido,alum_edad) values ('Mateo','Barello',17)
+insert into alumnos(alum_nombre,alum_apellido,alum_edad) values ('Maria Alejandra','Aguilar',18)
+insert into alumnos(alum_nombre,alum_apellido,alum_edad) values ('Alexis','Ledesma',18)
+insert into alumnos(alum_nombre,alum_apellido,alum_edad) values ('Tomas','Gimenez',18)
+insert into alumnos(alum_nombre,alum_apellido,alum_edad) values ('Maximo Valentin','Mendez',18)
+
+insert into ciudad(ciud_nombre,ciud_CodP) values ('Gualeguaychu',2820)
+insert into ciudad(ciud_nombre,ciud_CodP) values ('Urdinarrain',2826)
+insert into ciudad(ciud_nombre,ciud_CodP) values ('Colon',2720)
+insert into ciudad(ciud_nombre,ciud_CodP) values ('Villaguay',3240)
+insert into ciudad(ciud_nombre,ciud_CodP) values ('Diamante',3105)
+insert into ciudad(ciud_nombre,ciud_CodP) values ('Victoria',3153)
+
+insert into provincia(prov_nombre) values ('Entre Rios')
+insert into provincia(prov_nombre) values ('Buenos Aires')
+insert into provincia(prov_nombre) values ('Corrientes')
+
+insert into pais(pais_nombre) values ('Argentina')
+
+//
+select *from alumnos;
+select *from ciudad;
+select *from provincia;
+select *from pais;
+
+update alumnos set alum_nombre='Francisco' where alum_nombre = 'Valentin';
+update ciudad set ciud_nombre='Gualeguay' where ciud_nombre = 'Colon';
+update provincia set prov_nombre='Cordoba' where prov_nombre = 'Corrientes';
+
+delete from alumnos where alum_nombre='Alexis';
+delete from ciudad where ciud_nombre='Diamante';
+
+alter table alumnos add column alum_dni default 0;
+//
+
+Actividad 2
+//INSERTAR
+create procedure SP_insertar_alumno(
+	@nombre varchar(255),
+	@apellido varchar (255),
+	@edad int,
+	@email varchar(255),
+	@dni int,
+	@ciud_ID int
+)
+as
+begin
+	insert into alumno(alum_nombre,alum_apellido,alum_edad,alum_dni,alum_ciud_ID) values (@nombre,@apellido,@edad,@email,@dni,@ciud_ID)
+end
+
+exec SP_insertar_alumno 'Tomas','Giachello',17,'tomasd@gmail.com',46356543,1
+
+create procedure SP_insertar_ciudad(
+	@nombre varchar(255),
+)
+as
+begin
+	insert into ciudad() values (@nombre)
+end
+
+exec SP_insertar_ciudad 'Concordia'
+
+create procedure SP_insertar_provincia(
+	@nombre varchar(255),
+	
+)
+as
+begin
+	insert into provincia() values (@nombre)
+end
+
+exec SP_insertar_provincia 'Entre Rios'
+
+create procedure SP_insertar_pais(
+	@nombre varchar(255),
+	
+)
+as
+begin
+	insert into pais() values (@nombre)
+end
+
+exec SP_insertar_pais 'Argentina'
+//BORRAR
+create procedure SP_borrar_alumno(
+	@id int
+)
+as
+begin
+	delete from alumno where id=@id
+end
+
+exec SP_borrar_alumno 'Tomas','Giachello',17,'tomasd@gmail.com',46356543,1
+
+create procedure SP_borrar_ciudad(
+	@id int
+)
+as
+begin
+	delete from ciudad where id=@id
+end
+
+exec SP_borrar_ciudad 'Concordia'
+
+create procedure SP_borrar_provincia(
+	@id int
+	
+)
+as
+begin
+	delete from provincia where id=@id
+end
+
+exec SP_borrar_provincia 'Entre Rios'
+
+create procedure SP_borrar_pais(
+	@id int
+	
+)
+as
+begin
+	delete from pais where id=@id
+end
+
+exec SP_borrar_pais 'Argentina'
+//ACTUALIZAR DATOS
+create procedure SP_actualizar_alumnos(
+	@id
+	@nombre varchar(255),
+	@apellido varchar (255),
+	@edad int,
+	@email varchar(255),
+	@dni int,
+	@ciud_ID int
+)
+as
+begin
+ update alumnos set nombre=@nombre,apellido=@apellido,edad=@edad,email=@email,dni=@dni,ciud_ID=@ciud_ID where id=@id;
+end
+
+exec SP_actualizar_alumnos 'Tomas','Gimenez',18,'tomasg@gmail.com',43216543,1
+
+create procedure SP_actualizar_ciudades(
+	@ciud_id
+	@nombre varchar(255),
+	@ciud_CodP int
+)
+as
+begin
+ update ciudades set nombre=@nombre,ciud_CodP=@ciud_CodP where ciud_id=@ciud_id;
+end
+
+exec SP_actualizar_ciudades 'Carlos Paz',3890
+
+
+create procedure SP_actualizar_provincia(
+	@prov_id
+	@nombre varchar(255),
+)
+as
+begin
+ update provincia set nombre=@nombre where prov_id=@prov_id;
+end
+
+exec SP_actualizar_pais 'Neuquen'
+
+create procedure SP_actualizar_pais(
+	@pais_id
+	@nombre varchar(255),
+)
+as
+begin
+ update pais set nombre=@nombre where pais_id=@pais_id;
+end
+
+exec SP_actualizar_pais 'Brasil'
+
+//OBTENER POR ID
+create procedure SP_obtener_alumno(
+	@id int
+)
+as
+begin
+ select from alumno where alum_id=@id
+end
+
+create procedure SP_obtener_ciudad(
+	@id int
+)
+as
+begin
+ select from ciudad where ciud_id=@id
+end
+
+create procedure SP_obtener_provincia(
+	@id int
+)
+as
+begin
+ select from provincia where prov_id=@id
+end
+
+create procedure SP_obtener_pais(
+	@id int
+)
+as
+begin
+ select from provincia where pais_id=@id
+end
+
+
+//OBTENER LISTADO 
+as
+begin
+ select from alumno 
+end
+
+as
+begin
+ select from ciudad 
+end	
+
+as
+begin
+ select from provincia 
+end	
+
+as
+begin
+ select from pais 
+end		
+
+
+
+
