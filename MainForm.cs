@@ -62,32 +62,6 @@ namespace sender
 		}
 		
 		
-		void Pic_imagen2_Click(object sender, EventArgs e)
-		{
-			PictureBox pic_AUX;
-			pic_AUX=(PictureBox) sender ;
-			pic_central.Image=pic_AUX.Image;
-		}
-		
-		void Pic_imagen3_Click(object sender, EventArgs e)
-		{
-			PictureBox pic_AUX;
-			pic_AUX=(PictureBox) sender ;
-			pic_central.Image=pic_AUX.Image;
-		}
-		
-		void Pic_imagen4_Click(object sender, EventArgs e)
-		{
-			PictureBox pic_AUX;
-			pic_AUX=(PictureBox) sender ;
-			pic_central.Image=pic_AUX.Image;
-		}
-		
-		void Pic_imagen5_Click(object sender, EventArgs e)
-		{
-			PictureBox pic_AUX;
-			pic_AUX=(PictureBox) sender ;
-			pic_central.Image=pic_AUX.Image;
-		}
+	
 	}
 }
